@@ -17,10 +17,11 @@ def update_params(optim, network, loss, grad_clip=None, retain_graph=False):
     if grad_clip is not None:
         for p in network.modules():
             try:
-                torch.nn.utils.clip_grad_norm_(p.parameters(), grad_clip)
+                if len(list(p.parameters())) > 0:
+                    torch.nn.utils.clip_grad_norm_(p.parameters(), grad_clip)
             except Exception as e:
                 print(e)
-                print("p: {}".format(p.name()))
+                print("p: {}".format(p))
                 sys.stdout.flush()
     optim.step()
 

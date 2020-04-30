@@ -42,7 +42,7 @@ def run():
             'target_update_interval': 1,
             'grad_clip': 5.0,
             'update_per_steps': 4,
-            'start_steps': 100, # should be 10000,
+            'start_steps': 100,  # should be 10000,
             'log_interval': 10,
             'memory_load_interval': 5,
             'model_save_interval': 5,
