@@ -1,4 +1,5 @@
 import torch
+import sys
 
 
 def to_batch(state, action, reward, next_state, done, device):
@@ -15,8 +16,12 @@ def update_params(optim, network, loss, grad_clip=None, retain_graph=False):
     loss.backward(retain_graph=retain_graph)
     if grad_clip is not None:
         for p in network.modules():
-            if len(p.parameters()) > 0:
+            try:
                 torch.nn.utils.clip_grad_norm_(p.parameters(), grad_clip)
+            except Exception as e:
+                print(e)
+                print("p: {}".format(p.name()))
+                sys.stdout.flush()
     optim.step()
 
 
