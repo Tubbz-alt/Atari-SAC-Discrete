@@ -15,7 +15,7 @@ def update_params(optim, network, loss, grad_clip=None, retain_graph=False):
     loss.backward(retain_graph=retain_graph)
     if grad_clip is not None:
         for p in network.modules():
-            if p.nelement() > 0:
+            if p.parameters().nelement() > 0:
                 torch.nn.utils.clip_grad_norm_(p.parameters(), grad_clip)
     optim.step()
 
