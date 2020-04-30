@@ -89,6 +89,7 @@ class SacDiscreteActor(SacDiscreteAgent):
         state = self.env.reset()
 
         while not done:
+            # self.env.render()
             action = self.act(state)
             next_state, reward, done, _ = self.env.step(action)
             self.steps += 1
