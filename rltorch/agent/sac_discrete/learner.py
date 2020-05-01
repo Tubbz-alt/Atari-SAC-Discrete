@@ -116,9 +116,9 @@ class SacDiscreteLearner(SacDiscreteAgent):
         entropy_loss = self.calc_entropy_loss(entropies, weights)
 
         update_params(
-            self.q1_optim, self.critic.Q1, q1_loss, self.grad_clip)
+            self.q1_optim, self.critic.Q1, q1_loss, self.grad_clip, retain_graph=True)
         update_params(
-            self.q2_optim, self.critic.Q2, q2_loss, self.grad_clip)
+            self.q2_optim, self.critic.Q2, q2_loss, self.grad_clip, retain_graph=True)
         update_params(
             self.policy_optim, self.policy, policy_loss, self.grad_clip, retain_graph=True)
         self.update_params(
