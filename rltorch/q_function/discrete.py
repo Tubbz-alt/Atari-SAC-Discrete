@@ -15,7 +15,7 @@ class DiscreteConvQNetwork(BaseNetwork):
     def forward(self, states):
         h = self.base(states)
         return self.A_stream(h)
-        
+
         # V = self.V_stream(h)
         # A = self.A_stream(h)
         # Q = V + A - A.mean(1, keepdim=True)
@@ -32,6 +32,6 @@ class TwinedDiscreteConvQNetwork(BaseNetwork):
             num_channels, output_dim, initializer)
 
     def forward(self, states):
-        Q1 = self.Q1(states.clone())
-        Q2 = self.Q2(states.clone())
+        Q1 = self.Q1(states)
+        Q2 = self.Q2(states)
         return Q1, Q2
