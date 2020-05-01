@@ -32,6 +32,8 @@ class SacDiscreteLearner(SacDiscreteAgent):
         self.device = torch.device(
             "cuda" if cuda and torch.cuda.is_available() else "cpu")
 
+        torch.autograd.set_detect_anomaly(True)
+
         self.policy = ConvCategoricalPolicy(
             self.env.observation_space.shape[0],
             self.env.action_space.n).to(self.device)
@@ -107,8 +109,6 @@ class SacDiscreteLearner(SacDiscreteAgent):
         else:
             batch = self.memory.sample(self.batch_size)
             weights = 1.
-
-        # torch.autograd.set_detect_anomaly(True)
 
         q1_loss, q2_loss, errors, mean_q1, mean_q2 =\
             self.calc_critic_loss(batch, weights)
