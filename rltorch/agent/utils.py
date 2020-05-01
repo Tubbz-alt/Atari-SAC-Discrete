@@ -13,7 +13,7 @@ def to_batch(state, action, reward, next_state, done, device):
 
 def update_params(optim, network, loss, grad_clip=None, retain_graph=False):
     optim.zero_grad()
-    torch.autograd.set_detect_anomaly(True)
+    # torch.autograd.set_detect_anomaly(True)
     loss.backward(retain_graph=retain_graph)
     if grad_clip is not None:
         torch.nn.utils.clip_grad_norm_(network.parameters(), grad_clip)
