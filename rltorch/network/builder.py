@@ -24,7 +24,7 @@ str_to_activation = {
     'leakyrelu': nn.LeakyReLU(),
     'logsigmoid': nn.LogSigmoid(),
     'prelu': nn.PReLU(),
-    'relu': nn.ReLU(inplace=False),
+    'relu': nn.ReLU(),
     'relu6': nn.ReLU6(),
     'rrelu': nn.RReLU(),
     'selu': nn.SELU(),
@@ -71,11 +71,11 @@ def create_linear_network(input_dim, output_dim, hidden_units=[],
 def create_dqn_base(num_channels, initializer='xavier_uniform'):
     return nn.Sequential(
         nn.Conv2d(num_channels, 32, kernel_size=8, stride=4, padding=0),
-        nn.ReLU(inplace=False),
+        nn.ReLU(),
         nn.Conv2d(32, 64, kernel_size=4, stride=2, padding=0),
-        nn.ReLU(inplace=False),
+        nn.ReLU(),
         nn.Conv2d(64, 64, kernel_size=3, stride=1, padding=0),
-        nn.ReLU(inplace=False),
+        nn.ReLU(),
         Flatten(),
     ).apply(initialize_weights(str_to_initializer[initializer]))
 

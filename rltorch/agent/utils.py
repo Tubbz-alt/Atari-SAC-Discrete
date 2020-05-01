@@ -16,14 +16,15 @@ def update_params(optim, network, loss, grad_clip=None, retain_graph=False):
     torch.autograd.set_detect_anomaly(True)
     loss.backward(retain_graph=retain_graph)
     if grad_clip is not None:
-        for p in network.modules():
-            try:
-                torch.nn.utils.clip_grad_norm_(p.parameters(), grad_clip)
-            except Exception as e:
-                print(e)
-                print("p: {}".format(p))
-                sys.stdout.flush()
-                raise e
+        torch.nn.utils.clip_grad_norm_(network.parameters(), grad_clip)
+        # for p in network.modules():
+        #     try:
+        #         torch.nn.utils.clip_grad_norm_(p.parameters(), grad_clip)
+        #     except Exception as e:
+        #         print(e)
+        #         print("p: {}".format(p))
+        #         sys.stdout.flush()
+        #         raise e
     optim.step()
 
 
