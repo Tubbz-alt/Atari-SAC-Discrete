@@ -33,6 +33,6 @@ class TwinedDiscreteConvQNetwork(BaseNetwork):
 
     def forward(self, states):
 
-        Q2 = self.Q2(states)
-        Q1 = self.Q1(states)
+        Q2 = self.Q2(states.clone())
+        Q1 = self.Q1(states.clone())
         return Q1, Q2
