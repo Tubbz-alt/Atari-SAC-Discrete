@@ -35,4 +35,4 @@ class TwinedDiscreteConvQNetwork(BaseNetwork):
 
         Q2 = self.Q2(states.clone())
         Q1 = self.Q1(states.clone())
-        return Q1, Q2
+        return Q1, Q1
