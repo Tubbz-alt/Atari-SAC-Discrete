@@ -120,7 +120,7 @@ class SacDiscreteLearner(SacDiscreteAgent):
         update_params(
             self.q2_optim, self.critic.Q2, q2_loss, self.grad_clip)
         update_params(
-            self.policy_optim, self.policy, policy_loss, self.grad_clip)
+            self.policy_optim, self.policy, policy_loss, self.grad_clip, retain_graph=True)
         self.update_params(
             self.alpha_optim, None, entropy_loss)
 
