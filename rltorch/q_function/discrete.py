@@ -32,6 +32,7 @@ class TwinedDiscreteConvQNetwork(BaseNetwork):
             num_channels, output_dim, initializer)
 
     def forward(self, states):
-        Q1 = self.Q1(states)
+
         Q2 = self.Q2(states)
+        Q1 = self.Q1(states)
         return Q1, Q2
