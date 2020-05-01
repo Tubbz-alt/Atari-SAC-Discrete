@@ -107,6 +107,8 @@ class SacDiscreteLearner(SacDiscreteAgent):
         else:
             batch = self.memory.sample(self.batch_size)
             weights = 1.
+            
+        torch.autograd.set_detect_anomaly(True)
 
         q1_loss, q2_loss, errors, mean_q1, mean_q2 =\
             self.calc_critic_loss(batch, weights)
