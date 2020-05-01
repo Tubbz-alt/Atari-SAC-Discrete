@@ -164,10 +164,8 @@ class SacDiscreteLearner(SacDiscreteAgent):
         states, actions, rewards, next_states, dones = batch
         _, action_probs, log_action_probs, _ =\
             self.policy.sample(states)
-        # q1, q2 = self.critic(states)
-        # q = self.alpha * log_action_probs - torch.min(q1, q2)
-        q1, _ = self.critic(states)
-        q = self.alpha * log_action_probs - q1
+        q1, q2 = self.critic(states)
+        q = self.alpha * log_action_probs - torch.min(q1, q2)
         inside_term = torch.sum(action_probs * q, dim=1, keepdim=True)
         policy_loss = (inside_term * weights).mean()
         entropies = -torch.sum(

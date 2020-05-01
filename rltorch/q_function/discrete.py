@@ -14,12 +14,10 @@ class DiscreteConvQNetwork(BaseNetwork):
 
     def forward(self, states):
         h = self.base(states)
-        return self.A_stream(h)
-
-        # V = self.V_stream(h)
-        # A = self.A_stream(h)
-        # Q = V + A - A.mean(1, keepdim=True)
-        # return Q
+        V = self.V_stream(h)
+        A = self.A_stream(h)
+        Q = V + A - A.mean(1, keepdim=True)
+        return Q
 
 
 class TwinedDiscreteConvQNetwork(BaseNetwork):
