@@ -15,10 +15,10 @@ class DiscreteConvQNetwork(BaseNetwork):
         print('A_stream output dim: {}'.format(output_dim))
 
     def forward(self, states):
-        h = self.base(states)
-        V = self.V_stream(h)
-        A = self.A_stream(h)
-        Q = V + A - A.mean(1, keepdim=True)
+        h = self.base(states.clone())
+        V = self.V_stream(h.clone())
+        A = self.A_stream(h.clone())
+        Q = V.clone() + A.clone() - A.clone().mean(1, keepdim=True)
         return Q
 
 
