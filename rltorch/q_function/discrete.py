@@ -12,6 +12,8 @@ class DiscreteConvQNetwork(BaseNetwork):
         self.A_stream = create_linear_network(
             7*7*64, output_dim, hidden_units=[512], initializer=initializer)
 
+        print('A_stream output dim: {}'.format(output_dim))
+
     def forward(self, states):
         h = self.base(states)
         V = self.V_stream(h)
