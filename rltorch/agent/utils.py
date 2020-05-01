@@ -23,6 +23,7 @@ def update_params(optim, network, loss, grad_clip=None, retain_graph=False):
                 print(e)
                 print("p: {}".format(p))
                 sys.stdout.flush()
+                raise e
     optim.step()
 
 
