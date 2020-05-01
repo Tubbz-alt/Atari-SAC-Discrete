@@ -14,8 +14,8 @@ class DiscreteConvQNetwork(BaseNetwork):
 
     def forward(self, states):
         h = self.base(states)
-        V = self.V_stream(h)
-        A = self.A_stream(h)
+        V = self.V_stream(h.clone())
+        A = self.A_stream(h.clone())
         Q = V + A - A.mean(1, keepdim=True)
         return Q
 
